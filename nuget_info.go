@@ -30,6 +30,7 @@ func GetNugetVersions(nugetName string) ([]string, error) {
 	return versions.Versions, nil
 }
 
+// Package describes xml package section
 type Package struct {
 	XMLName  xml.Name      `xml:"package"`
 	Metadata NugetMetadata `xml:"metadata"`
