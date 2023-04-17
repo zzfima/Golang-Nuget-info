@@ -7,6 +7,8 @@ import (
 	"net/http"
 )
 
+const nugetAddress = "https://api.nuget.org/v3-flatcontainer/"
+
 // Versions describes list of versions
 type Versions struct {
 	Versions []string `json:"versions"`
@@ -14,7 +16,7 @@ type Versions struct {
 
 // GetNugetVersions retrieve list of versions of [nugetName] Nuget
 func GetNugetVersions(nugetName string) ([]string, error) {
-	response, e := http.Get("https://api.nuget.org/v3-flatcontainer/" + nugetName + "/index.json")
+	response, e := http.Get(nugetAddress + nugetName + "/index.json")
 	if e != nil {
 		return nil, e
 	}
@@ -28,7 +30,8 @@ func GetNugetVersions(nugetName string) ([]string, error) {
 	return versions.Versions, nil
 }
 
-type pckg struct {
+// Package describes xml package section
+type Package struct {
 	XMLName  xml.Name      `xml:"package"`
 	Metadata NugetMetadata `xml:"metadata"`
 }
@@ -50,8 +53,8 @@ type NugetMetadata struct {
 
 // GetNugetMetadata retrieve metadata of [nugetName] Nuget of [version]
 func GetNugetMetadata(nugetName string, version string) (NugetMetadata, error) {
-	var pckg pckg
-	url := "https://api.nuget.org/v3-flatcontainer/" + nugetName + "/" + version + "/" + nugetName + ".nuspec"
+	var pckg Package
+	url := nugetAddress + nugetName + "/" + version + "/" + nugetName + ".nuspec"
 	response, e := http.Get(url)
 	if e != nil {
 		return pckg.Metadata, e

@@ -8,6 +8,7 @@ import (
 
 func TestVersion(t *testing.T) {
 	v, e := GetNugetVersions("Castle.Core")
+
 	require.Nil(t, e)
 	require.Equal(t, "1.1.0", v[0])
 }
@@ -20,6 +21,7 @@ func TestLicense(t *testing.T) {
 
 func TestMetadata(t *testing.T) {
 	m, e := GetNugetMetadata("Castle.Core", "5.1.0")
+
 	require.Nil(t, e)
 	require.Equal(t, "Castle.Core", m.ID)
 	require.Equal(t, "5.1.0", m.Version)

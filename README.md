@@ -1,4 +1,11 @@
-# Golang-Nuget-info
+Nuget-info
+
+Ability to retrieve Nuget info
+
+Can retrieve all Nuget versions
+
+Can retrieve all metadata of Nuget version specific
+
 
 go module maintenance initialization: go mod init Golang-Nuget-info
 Check what go tools installed: Ctrl Shift P-> Go: Locate Configured Go tools
